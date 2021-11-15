@@ -1,0 +1,114 @@
+<!-- Page 13 Display Bill-->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 13</h1>
+
+<p><a href="/page1">Create a new Bill</a>   |   <a href="/history">See your history of passed bills</a></p>
+
+<h3>Display Bill</h3>
+
+<table border="0" style="text-align: left;">
+    <tr>
+        <th>Grand Total:</th>
+        <td>${{"{0:0.2f}".format(grandtotal)}}</td>
+    </tr>
+    <tr>
+        <th>Subtotal:</th>
+        <td>${{"{0:0.2f}".format(subtotal)}}</td>
+    </tr>
+    <tr>
+        <th>Tax:</th>
+        <td>${{"{0:0.2f}".format(tax)}}</td>
+    </tr>
+
+<!-- display included gratuity if it has been entered -->
+{% if inc_tip != 0 %}
+    <tr>
+        <th>Included Gratuity:</th>
+        <td>${{"{0:.2f} {1:.0f}% on (subtotal + tax)".format(inc_tip, inc_tip_pct*100)}}</td>
+    </tr>
+{% endif %}
+
+<!-- display rounded tip -->
+{% if roundtype is defined %}
+    <tr>
+        <th>Tip:</th>
+        <td>${{"{0:.2f} (rounded {1} {2}) {3:.0f}% on subtotal".format(add_tip, roundtype, percision, add_tip_pct*100)}}</td>
+    </tr>
+
+<!-- display rounded tip and rounded total -->
+{% elif roundtype is defined and answer_Rtol %}
+    <tr>
+        <th>Tip:</th>
+        <td>${{"{0:.2f} (includes difference from rounded total and rounded {1} {2} tip) {3:.0f}% original tip on subtotal".format(add_tip, roundtype, percision, add_tip_pct*100)}}</td>
+    </tr>
+
+<!-- display rounded total and unrounded tip -->
+{% elif answer_Rtol%}
+    <tr>    
+        <th>Tip:</th>
+        <td>${{"{0:.2f} (includes difference from rounded total) {1:.0f}% original tip on subtotal".format(add_tip, add_tip_pct*100)}}</td>
+    </tr>
+
+<!-- display unrounded tip -->
+{% elif add_tip == 0 %}
+<tr>
+    <th>Tip:</th>
+    <td>${{"{0:0.2f}".format(add_tip)}}</td>
+</tr>
+
+{% else %}
+<tr>
+    <th>Tip:</th>
+    <td>${{"{0:0.2f} ({1:0.0f}% on subtotal)".format(add_tip, add_tip_pct*100)}}</td>
+</tr>
+{% endif %}
+</table>
+
+<br>
+<hr>
+<h3>Display Each Person's Contribution</h3>
+
+
+{% for i in person %}
+<table border="0" style="text-align: left;">
+<tr>
+    <th colspan="2">{{i.Name}}:</th>
+    <th>Individual Total: ${{"{0:0.2f}".format(i.TolBill())}}</th>
+</tr>
+<tr>
+        <td colspan="2">Sub Total:</td>
+        <td>${{"{0:0.2f}".format(i.SubBill())}}</td>
+</tr>
+<tr>
+    {% for k,v in i.ItemColl.items() %}
+    <td>&emsp;</td>
+    <td>{{k}}:</td>
+    <td>&emsp;${{"{0:0.2f}".format(v)}}</td>
+    {% endfor %}
+</tr>
+<tr>
+    <td colspan="2">Tax:</td>
+    <td>${{"{0:0.2f}".format(i.Tax)}}</td>
+</tr>  
+<tr>    
+    <td colspan="2">Tip:</td>
+    <td>${{"{0:0.2f}".format(i.Tip)}}</td>
+</tr>  
+<tr>
+    <td colspan="2">Included Gratuity:</td>
+    <td>${{"{0:0.2f}".format(i.IncTip)}}</td>
+</tr> 
+<tr>
+    <td colspan="2">Birthday Share:</td>
+    <td>${{"{0:0.2f}".format(i.Bday)}}</td>
+</tr>
+</table>
+<br>      
+{% endfor %}
+
+
+
+{% endblock %}

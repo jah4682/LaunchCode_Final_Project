@@ -1,0 +1,22 @@
+<!-- Page 4 Tax-->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 4</h1>
+
+
+<form action="tax" method="POST">
+    <label for="tax">Enter Tax:</label><br />
+    {% if error %}
+        <input id="tax" name="tax" type="text" value="{{tax}}" />
+        <span class="error">Tax must be numbers only in x.xx format</span>
+    {% else %}
+        <input id="tax" name="tax" type="text" placeholder="1.00" />
+    {% endif %}
+
+    <input type="submit" value="Next Page"> 
+</form>
+
+
+{% endblock %}

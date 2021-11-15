@@ -1,0 +1,43 @@
+<!-- Page 9 Itemized Dishes -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 9</h1>
+
+{% if errorN or errorP %}
+<!-- redisplay form -->
+<form action="assignment" method="POST">
+        <label for="nickname">Nickname for this item</label>
+        <input id="nickname" type="text" name="item_Name" value="{{item_Name}}">
+        {% if errorN %}
+            <span class="error">Nickname must but letters, numbers, or space only</span>
+        {% endif %}
+        <label for="price">Price</label>
+        <input id="price" type="text" name="item_Price" value="{{item_Price}}">
+        {% if errorP %}
+            <span class="error">Price must be numbers only in x.xx format</span>
+        {% endif %}
+
+        <input type="hidden" name="answer" value="1">
+    
+        <input type="submit" value="Next Page">
+    </form>
+
+{% else %}
+<!-- Display Form Question -->
+
+<form action="assignment" method="POSt">
+    <label for="nickname">Nickname for this item</label>
+    <input id="nickname" type="text" name="item_Name" placeholder="food item name">
+    <label for="price">Price</label>
+    <input id="price" type="text" name="item_Price" placeholder="0.00">
+
+    <input type="hidden" name="answer" value="1">
+
+    <input type="submit" value="Next Page">
+</form>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,76 @@
+<!-- Page 5 Included Gratuity -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 5</h1>
+
+
+{% if error %}
+    <!-- redisplay form -->
+    <form action="inctip" method="POST">
+        <label for="inctip">Enter Included Tip:</label><br />
+        <input id="inctip" name="inc_tip" type="text" value="{{inc_tip}}" />
+        <span class="error">Included tip must be numbers only in x.xx format</span>
+        <input type="submit" value="Next Page"> 
+    </form>
+
+{% else %}
+
+    <!-- Display Form Question -->
+    <label for="myselect">Is gratuity included in this bill?:</label>
+    <select id="purpose">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+    </select>
+
+    <!-- Skip included gratuity Form -->
+    <div id="div1" style="display:none">
+        <form action="inctip" method="POST">
+            <input type="hidden" name="inc_tip" value="0">
+            <input type="submit" value="Next Page"> 
+        </form>
+    </div>
+
+    <!-- Display included gratuity Form -->
+    <div id="div2" style="display:none">
+        <form action="inctip" method="POST">
+            <label for="inc_tip">Enter Included Tip:</label><br />
+            <input id="inctip" name="inc_tip" type="text" placeholder="0.00" />
+            <input type="submit" value="Next Page"> 
+        </form>
+    </div>
+
+{% endif %}
+
+
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        // first display "No" selection when document is first loaded
+        $('#div1').show();
+        
+        // when selection is changed to "Yes". Display included gratuity text box
+        $( "#purpose" ).change(function() {
+            var selection = $(this).val();
+            if (selection == 'yes')
+            { 
+                $('#div2').show();
+                $('#div1').hide();
+            }
+        });
+    
+        // when selection is changed back to "No". Hide included gratuity text box
+        $( "#purpose" ).change(function() {
+            var selection = $(this).val();
+            if (selection == 'no')
+            {
+                $('#div2').hide();
+                $('#div1').show();
+            }
+        });
+    
+    });
+    </script>
+
+
+{% endblock %}

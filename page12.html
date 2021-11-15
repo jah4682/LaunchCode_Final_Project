@@ -1,0 +1,67 @@
+<!-- Page 12 Birthday Person-->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 12</h1>
+
+{% if error == True %}
+    <p class="error">{{errorMsg}}</p>
+{% endif %}
+
+<label>Is there a birthday person today?</label>
+<br>
+<input type="radio" id="btnstatus1" name="round" checked> No
+<input type="radio" id="btnstatus2" name="round"> Yes
+
+<!-- display next button -->
+<div id="div1" style="display:none">
+    <form action="birthday" method="POST">
+        <input type="hidden" name="answer" value="n">
+        <input type="submit" value="Next Page"> 
+    </form>
+</div>
+
+<!-- ask for who is the birthday person -->
+<div id="div2" style="display:none">
+    <form action="birthday" method="POST">
+        <br>
+        <label>Who is the birthday person(s)?</label>
+        <br>
+        <!-- print names loop -->
+        {% for i in person %}
+            <input id="{{i.Name}}" type="checkbox" name="bday_person_list"  value="{{i.Name}}"> <label for="{{i.Name}}">{{i.Name}} &emsp;</label>
+        {% endfor %}
+        <input type="hidden" name="answer" value="y">
+        <br>
+        <input type="submit" value="Next Page">
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        $('#div1').show();
+        $('#div2').hide();
+        
+        $( 'input[type=radio]' ).click(function() {
+            var isChecked = $('#btnstatus2').prop('checked');
+            if (isChecked)
+            {
+                $('#div2').show();
+                $('#div1').hide();
+            }
+        });
+
+        $( 'input[type=radio]' ).click(function() {
+            var isChecked = $('#btnstatus1').prop('checked');
+            if (isChecked)
+            {
+                $('#div2').hide();
+                $('#div1').show();
+            }
+        });
+        
+    });
+</script>
+
+{% endblock %}

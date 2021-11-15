@@ -1,0 +1,15 @@
+Test Birthday function
+
+{% for i in person %}
+<p>Name: {{i.Name}}: <br>
+    Total: ${{"{0:0.2f}".format(i.TolBill())}} <br> 
+    Sub Total: ${{i.SubBill()}} <br>
+    {% for k,v in i.ItemColl.items() %}
+        {{k}}: ${{v}} <br>
+    {% endfor %}
+    Tax: ${{i.Tax}} <br>
+    Tip: ${{i.Tip}} <br>
+    Included Gratuity: ${{i.IncTip}} <br>
+    Birthday Share: ${{i.Bday}}
+
+{% endfor %}

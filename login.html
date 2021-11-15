@@ -1,0 +1,40 @@
+<!-- Login page -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Login to your user account</h1>
+
+<p>If you don't have an account <a href="/registration">register here</a></p>
+
+<!-- flash message -->
+{% with messages = get_flashed_messages(with_categories=True) %}
+<ul>
+    <!-- loop through list of messages -->
+    {% for category,message in messages %}
+        <li class='{{category}}'>{{message}}</li>
+    {% endfor %}
+</ul>
+{% endwith%}
+
+<!-- form for logging in users -->
+<form action="/login" method="post">
+    <table>
+        <tr>
+            <td><label for="username">Username</label></td>
+            <td>
+                <input id="username" name="username_form" type="text" value="{{username_val}}">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td>
+                <input id="password" name="password_form" type="password">
+            </td>
+        </tr>
+
+    </table>
+    <input type="submit" value="Log In">
+</form>
+
+{% endblock %}

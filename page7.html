@@ -1,0 +1,74 @@
+<!-- Page 7 Rounding Tip -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 7</h1>
+
+
+<!-- Display Form Question -->
+
+<label for="rounding">Tip is ${{"{0:0.2f}".format(add_tip)}} Do you want to round this tip?</label><br />
+<input type="radio" id="btnstatus1" name="round" checked> No
+<input type="radio" id="btnstatus2" name="round"> Yes
+
+
+    <!-- display next button -->
+    <div id="div1" style="display:none">
+        <form action="roundtip" method="POST">
+            <input type="hidden" name="answer" value="n">
+            <input type="submit" value="Next Page"> 
+        </form>
+    </div>
+
+
+
+<div id="div2" style="display:none">
+    <form action="roundtip" method="POST">
+        <label for="roundtype">Round:</label>
+        <input type="radio" id="roundtype" name="roundtype" value="up">UP
+        <input type="radio" id="roundtype" name="roundtype" value="down">DOWN
+        <input type="radio" id="roundtype" name="roundtype" value="closest">CLOSEST
+        <br>
+        
+        <label for="percision">To the next:</label>
+        <input type="radio" id="percision" name="percision" value="dollar">1.00
+        <input type="radio" id="percision" name="percision" value="half">0.50
+        <input type="radio" id="percision" name="percision" value="quarter">0.25
+        <input type="radio" id="percision" name="percision" value="tenth">0.10
+        
+        <input type="hidden" name="answer" value="y">
+
+        <input type="submit" value="Next Page"> 
+    </form>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        $('#div1').show();
+        $('#div2').hide();
+        
+        $( 'input[type=radio]' ).click(function() {
+            var isChecked = $('#btnstatus2').prop('checked');
+            if (isChecked)
+            {
+                $('#div2').show();
+                $('#div1').hide();
+            }
+        });
+
+        $( 'input[type=radio]' ).click(function() {
+            var isChecked = $('#btnstatus1').prop('checked');
+            if (isChecked)
+            {
+                $('#div2').hide();
+                $('#div1').show();
+            }
+        });
+        
+    });
+</script>
+
+{% endblock %}

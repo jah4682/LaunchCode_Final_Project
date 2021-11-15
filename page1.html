@@ -1,0 +1,15 @@
+<!-- Page 1 Number of people -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 1</h1>
+
+<form action="numppl" method="POST">
+    <label for="people">How many people?</label>
+    <input type="number" name="num_ppl" value="2" min="2" max="10" width="5">
+
+    <input type="submit" value="Next Page">
+</form>
+
+{% endblock %}

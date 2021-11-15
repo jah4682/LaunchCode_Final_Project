@@ -1,0 +1,27 @@
+<!-- Page 3 Subtotal-->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 3</h1>
+
+
+<form action="subtotal" method="POST">
+    <label for="subtotal">Enter Subtotal (before tax and tip):</label><br />
+    {% if error %}
+        <input id="subtotal" name="subtotal" type="text" value="{{subtotal}}" />
+        {% if zero_div is defined %}
+        <span class="error">{{zero_div}}</span>
+        {% else %}
+            <span class="error">Subtotal must be numbers only in x.xx format</span>
+        {% endif %}
+    {% else %}
+        <input id="subtotal" name="subtotal" type="text" placeholder="1.00" />
+    {% endif %} 
+    
+    <input type="submit" value="Next Page">
+</form>
+
+<!-- <a href="/page2?person={{person}}">back</a> -->
+
+{% endblock %}

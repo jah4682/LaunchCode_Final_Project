@@ -1,0 +1,25 @@
+<!-- Page 10 Dish Assignment -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 10</h1>
+
+<form action="assignment" method="POST">
+    <label>Enter the name of person(s) who ordered or shared <strong><u>{{item_Name}}</u></strong></label><br>
+    
+    <!-- print names loop -->
+    {% for i in person %}
+        <input id="{{i.Name}}" type="checkbox" name="shared_ordered_list"  value="{{i.Name}}"> <label for="{{i.Name}}">{{i.Name}} &emsp;</label>
+    {% endfor %}
+
+    <input type="hidden" name="item_Name" value="{{item_Name}}">
+    <input type="hidden" name="item_Price" value="{{item_Price}}">
+    
+    <input type="hidden" name="answer" value="2">
+    <br><br>
+    <input type="submit" value="Next">
+</form>
+
+
+{% endblock %}

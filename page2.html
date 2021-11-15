@@ -1,0 +1,47 @@
+<!-- Page 2 Name of each person -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 2</h1>
+
+<form action="nameppl" method="POST">
+    <label for="people">Please name each person at your table</label>
+    <table id="people">
+            {% if error %}
+                {% for obj in Pnames %}
+                    {% if obj in pError%}
+                        <tr>
+                            <td><input name="Pnames" type="text" value="{{obj}}"><td>
+                            <span class="error">This name is invalid</span>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td><input name="Pnames" type="text" value="{{obj}}"><td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {# {% if person is defined %}
+                    <h3>{{person}}</h3>
+                    {% for obj in person %}
+                    <h3>{{obj}}</h3>
+                    <tr>
+                        <td><input name="Pnames" type="text" value="{{obj.Name}}"><td>
+                    </tr>
+                    {% endfor %} 
+                {% else %} #}
+                    {% for i in range(num_ppl) %}
+                        <tr>
+                            <td><input name="Pnames" type="text" value="Person{{i+1}}"><td>
+                        </tr>
+                    {% endfor %}
+                {#{% endif %}#}
+            {% endif %}
+    </table>
+    <input type="submit" value="Next Page" />
+</form>
+
+<!-- <a href="/">back</a> -->
+
+{% endblock %}

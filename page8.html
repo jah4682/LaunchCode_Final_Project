@@ -1,0 +1,26 @@
+<!-- Page 8 Itemized Dishes & assign to person -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 8</h1>
+
+{% if subtotal == bill_so_far %}
+    <!-- Landing Form from Add Tip (page 6) or Round Tip (page 7) -->
+    <form action="assignment" method="POST">
+        <label for="answer">Do you want to itemize dishes or split evenly among all parties?</label><br>
+        <button type="submit" id="answer" name="answer" value="0">Enter a bill item?</button>
+        <button type="submit" id="answer" name="answer" value="3">Split ${{"{0:0.2f}".format(bill_so_far)}} equally</button>   
+    </form>
+
+{% else %}
+    <!-- subsequent Form for looping through dish assignment -->
+    <form action="assignment" method="POST">
+        <label for="answer">Continue itemizing dishes or split the rest?</label><br>
+        <button id="answer" name="answer" value="0">Enter another bill item?</button>
+        <button id="answer" name="answer" value="3">Split the rest ${{"{0:0.2f}".format(bill_so_far)}} equally</button>
+    </form>
+
+{% endif %}
+
+{% endblock %}

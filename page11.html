@@ -1,0 +1,23 @@
+<!-- Page 11 Round Total Option-->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Page 11</h1>
+
+<!-- Display each person's total -->
+{% for i in person %}
+    {{i.Name}}: ${{"{0:0.2f}".format(i.SubBill())}} &emsp;
+{% endfor %}
+<br><br>
+<!-- Display Form Question -->
+<form action="roundtotal" method="POST">
+    <label for="roundtol">Do you want to round up each person's total?<br>(The difference will be added to each person's tip.)<br><br></label>
+    <input type="radio" id="roundtol" name="answer" value="n" checked> No
+    <input type="radio" id="roundtol" name="answer" value="y"> Yes
+    <br>
+    <input type="submit" value="Next Page"> 
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "page6.html" %}
+
+{% block tip %}
+<!-- quick buttons -->
+<label>Click quick tip button</label>
+<button name="add_tip" value="10">10% ({{ tipbtn[0] }})</button>
+<button name="add_tip" value="12">12% ({{ tipbtn[1] }})</button>
+<button name="add_tip" value="15">15% ({{ tipbtn[2] }})</button>
+<button name="add_tip" value="18">18% ({{ tipbtn[3] }})</button>
+<button name="add_tip" value="20">20% ({{ tipbtn[4] }})</button>
+<br>
+<label for="customtip">Or Enter A Custom Tip?</label>
+<input type="checkbox" id="customtip" events="change" >
+
+<!-- Custom Tip slider -->
+<div id="custom_tip">
+    <input type="range" name="add_tip" id="slider" list="tickmarks" min="0" max="25" value="0" step="1">
+    <span style="display:inline-block" id="slider_value"></span><span>% $</span><span id="dollar_amt"></span>
+</div>
+
+{% endblock %}

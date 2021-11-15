@@ -1,0 +1,42 @@
+<!-- History Page -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Your pass bills history</h1>
+
+<h3><a href="/">Return to homepage</a></h3>
+
+<!-- Display bill history -->
+
+
+
+{% for x in history %}
+    {% set outerloop = loop %}
+    {% set count = outerloop.index0+1 %}
+    Bill #{{count}}
+
+    <h3>Overall Bill</h3>
+    
+    {% set history_overall = x.bill_overall.split(",") %}
+        {% for i in history_overall %}
+            {{i}}<br />
+        {% endfor %}
+   
+    <h3>Individual's Contribution</h3>
+
+    {% set history_individual = x.bill_ind.split(",") %}
+        {% for i in history_individual %}
+            {% if ":" not in i %}
+                <br><strong>{{i}}</strong><br>
+            {% else %}
+                {{i}}<br />
+            {% endif %}
+    {% endfor %}
+
+    <hr><br>
+{% endfor %}
+
+
+
+{% endblock %}
